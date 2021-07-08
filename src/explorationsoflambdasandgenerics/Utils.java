@@ -1,24 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package explorationsoflambdasandgenerics;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Paul
+ *TIME ESTIMATE 168 HOURS
+ * @author Allyn
  */
-public class Utils {
+public class Utils implements IntegerModifier{
 
     /*
     1. write a static method like the one we did in class. call it "repeat" it
     should take 2 parameters, (1) an instance of any type and (2) an int of the
     number of times to repeat said element in an arraylist.
      */
+    public static <T> ArrayList<T> repeat (T x ,int NumOfTimes){
+        ArrayList<T> ls = new ArrayList();
+        for(int i = 0; i<NumOfTimes; i++){
+        ls.add(x);
+        }       
+        return ls;
+    }
    
 
     /*
@@ -26,6 +28,16 @@ public class Utils {
     and RETURNS a two line string where the first line is the index of each
     element.
      */
+    
+    public static <S> String indexedOutput(ArrayList<S> a){
+        String index = "";
+        String nextLine = "\n";
+        for(int i = 0; i< a.size(); i++){
+          index = "" + a.get(i);
+    
+        }        
+        return index + "" + nextLine ;
+    }
    
 
     /*
@@ -45,6 +57,19 @@ public class Utils {
     Here is one you can use:
          assert modifyIntegerXTimes(x -> x + 1, 5, -1) == 4 : "+1 modify test failed";
      */
+    
+    public static Integer modifyIntegerXTimes(IntegerModifier modify, int timesToApply, Integer startingInteger){
+        Integer modified = modify.Modify(startingInteger);
+        for(int i =0; i<timesToApply;i++){
+            modified = modify.Modify(modified);
+        }
+        return modified;
+    }
+    
+    public static void modifyIntegerXTimesTester(){
+        //5 assertions
+        assert modifyIntegerXTimes(x -> x + 1, 5, -1) == 4 : "+1 modify test failed";
+    }
   
 
     /*
@@ -78,7 +103,15 @@ public class Utils {
     Hint 2: You will need to create an interface for each arguement in
     checkInvolutence.
      */
-   
+   public static void testInvolutence(){
+       
+   }
+
+    @Override
+    public Integer Modify(Integer x) {
+        x+=x;
+        return x ;
+    }
 
   
 
